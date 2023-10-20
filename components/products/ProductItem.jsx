@@ -25,7 +25,7 @@ const ProductItem = ({product}) => {
               </div>
               <div className="md:w-2/4">
                 <div className="p-4">
-                  <Link href={`/product/${product.name}`} className="hover:text-blue-600">
+                  <Link href={`/product/${product._id}`} className="hover:text-blue-600">
                     {product.name}
                   </Link>
                   <div className="flex flex-wrap items-center space-x-2 mb-2">
@@ -52,7 +52,7 @@ const ProductItem = ({product}) => {
               <div className="md:w-1/4 border-t lg:border-t-0 lg:border-l border-gray-200">
                 <div className="p-5">
                   <span className="text-xl font-semibold text-black">
-                    {product?.price}
+                    {product?.price}Rs
                   </span>
 
                   <p className="text-green-500">Free Shipping</p>

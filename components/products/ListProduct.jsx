@@ -6,7 +6,6 @@ import StarRatings from 'react-star-ratings';
 import ProductItem from './ProductItem';
 
 const ListProduct = ({data}) => {
- console.log(data);
   return (
     <section className="py-12">
     <div className="container max-w-screen-xl mx-auto px-4">
