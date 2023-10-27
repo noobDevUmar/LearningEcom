@@ -1,5 +1,5 @@
 import Product from "../model/product";
-import ApiFilter from "../utils/ApiFilter";
+import ApiFilter from "../utils/APIFilter";
 
 export const newProduct = async(req,res,next)=>{
     const product = await Product.create(req.body)
@@ -10,16 +10,26 @@ export const newProduct = async(req,res,next)=>{
 
 export const getAllPoducts = async(req,res,next)=>{
 
-    const api = new ApiFilter(Product.find(),req.query)
-    .search()
-    .filter()
-    
-    
-
-    const products = await api.query
+    const resPerPage = 3;
+    const productsCount = await Product.countDocuments();
+  
+    const apiFilters = new ApiFilter(Product.find(), req.query)
+      .search()
+      .filter();
+  
+    let products = await apiFilters.query;
+    const filteredProductsCount = products.length;
+  
+    apiFilters.pagination(resPerPage);
+  
+    products = await apiFilters.query.clone();
+  
     res.status(200).json({
-        products,
-    })
+      productsCount,
+      resPerPage,
+      filteredProductsCount,
+      products,
+    });
 }
 
 export const getSingleProduct = async(req,res,next)=>{
