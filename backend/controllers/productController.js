@@ -10,7 +10,7 @@ export const newProduct = async(req,res,next)=>{
 
 export const getAllPoducts = async(req,res,next)=>{
 
-    const resPerPage = 3;
+    const resPerPage = 2;
     const productsCount = await Product.countDocuments();
   
     const apiFilters = new ApiFilter(Product.find(), req.query)
