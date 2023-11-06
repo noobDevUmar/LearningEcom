@@ -8,7 +8,9 @@ const getProducts = async (searhParams) => {
 
   const urlParams = {
     keyword : searhParams.search,
-    page : searhParams.page
+    page : searhParams.page,
+    category:searhParams.category,
+    "ratings[gte]":searhParams.ratings
   }
 
   const queryParams  = queryString.stringify(urlParams)

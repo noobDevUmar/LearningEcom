@@ -25,12 +25,6 @@ const CustomPagination = ({productsCount,resPerPage}) => {
 
 
             const path = window.location.pathname + '?' + queryParams
-
-
-
-            console.log(queryParams);
-            console.log('path',path);
-
             router.push(path)
         }
 

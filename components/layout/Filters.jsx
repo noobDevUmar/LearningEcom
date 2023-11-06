@@ -1,9 +1,40 @@
 'use client'
-import React from "react";
+import React, { useState } from "react";
 import StarRatings from "react-star-ratings";
-
+import { useRouter } from "next/navigation";
 const Filters = () => {
   let queryParams;
+  const router = useRouter();
+const [min,setMin] = useState('')
+const [max,setMax]= useState('')
+
+  function handleclick(checkbox) {
+    if (typeof window !== "undefined") {
+      queryParams = new URLSearchParams(window.location.search);
+    }
+
+    const checkboxes = document.getElementsByName(checkbox.name);
+
+    checkboxes.forEach((item) => {
+      if (item !== checkbox) item.checked = false;
+    });
+
+    if (checkbox.checked === false) {
+      // Delete the filter from query
+      queryParams.delete(checkbox.name);
+    } else {
+      // Set filter in the query
+      if (queryParams.has(checkbox.name)) {
+        queryParams.set(checkbox.name, checkbox.value);
+      } else {
+        queryParams.append(checkbox.name, checkbox.value);
+      }
+    }
+    const path = window.location.pathname + "?" + queryParams.toString();
+    router.push(path);
+  }
+
+
 
   function checkHandler(checkBoxType, checkBoxValue) {
     if (typeof window !== "undefined") {
@@ -16,6 +47,9 @@ const Filters = () => {
       return false;
     }
   }
+
+
+  function 
 
   return (
     <aside className="md:w-1/3 lg:w-1/4 px-4">
@@ -66,6 +100,7 @@ const Filters = () => {
                 value="Electronics"
                 className="h-4 w-4"
                 defaultChecked={checkHandler("category", "Electronics")}
+              onClick={(e)=> handleclick(e.target)}
               />
               <span className="ml-2 text-gray-500"> Electronics </span>
             </label>
@@ -78,6 +113,7 @@ const Filters = () => {
                 value="Laptops"
                 className="h-4 w-4"
                 defaultChecked={checkHandler("category", "Laptops")}
+                onClick={(e)=> handleclick(e.target)}
               />
               <span className="ml-2 text-gray-500"> Laptops </span>
             </label>
@@ -90,6 +126,7 @@ const Filters = () => {
                 value="Toys"
                 className="h-4 w-4"
                 defaultChecked={checkHandler("category", "Toys")}
+                onClick={(e)=> handleclick(e.target)}
               />
               <span className="ml-2 text-gray-500"> Toys </span>
             </label>
@@ -102,6 +139,7 @@ const Filters = () => {
                 value="Office"
                 className="h-4 w-4"
                 defaultChecked={checkHandler("category", "Office")}
+                onClick={(e)=> handleclick(e.target)}
               />
               <span className="ml-2 text-gray-500"> Office </span>
             </label>
@@ -114,7 +152,8 @@ const Filters = () => {
                 value="Beauty"
                 className="h-4 w-4"
                 defaultChecked={checkHandler("category", "Beauty")}
-              />
+                onClick={(e)=> handleclick(e.target)}
+             />
               <span className="ml-2 text-gray-500"> Beauty </span>
             </label>
           </li>
@@ -133,6 +172,7 @@ const Filters = () => {
                   value={rating}
                   className="h-4 w-4"
                   defaultChecked={checkHandler("ratings", `${rating}`)}
+                  onClick={(e)=> handleclick(e.target)}
                 />
                 <span className="ml-2 text-gray-500">
                   {" "}
